@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
-  <script async src="script.js"></script>
+  <script async type="module" src="script.js"></script>
 </head>
+
 <body>
-  <h1>Color Palette Generator</h1>
-  <input type="color" id="color-input" value="#2FD0B8">
-  <div id="palette"></div>
+  <div class="container">
+    <h1>Color Palette Generator</h1>
+    <div id="controls">
+        <input type="color" id="color-input" value="#2FD0B8">
+        <input autocomplete="off" type="text" id="hex-input" value="#2FD0B8">
+      <button id="share-button"><img src="./assets/link.svg" alt="Share color palette"></button>
+    </div>
+    <div id="palette"></div>
+    <h2>Example components</h2>
+    <div class="example-components">
+      <div class="component">
+        <h3>Buttons</h3>
+        <button class="button">Primary Button</button>
+      </div>
+      <div class="component">
+        <h3>Input Fields</h3>
+        <input type="text" class="input" placeholder="Enter text...">
+      </div>
+      <div class="component">
+        <h3>Cards</h3>
+        <div class="card">
+          <h4>Card Title</h4>
+          <p>This is some sample text for the card component.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
