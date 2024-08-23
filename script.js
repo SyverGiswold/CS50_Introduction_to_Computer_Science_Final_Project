@@ -56,7 +56,7 @@ function generatePalette(hex) {
 
   // Generate a color palette with a smooth transition
   const palette = Array.from({ length: 11 }, (_, i) => {
-    const newL = 95 - Math.pow(i / 11, 1.2) * 90;
+    const newL = 95 - Math.pow(i / 11, 1.5) * 90;
     return convertHSLToHex(h, s, newL);
   });
 
@@ -102,9 +102,27 @@ function updatePalette(color) {
   // Update HTML element with CSS variables
   document.documentElement.style.cssText += cssVariables;
 
-  // Update URL with the new color
-  updateURL(color);
+  // Update URL with the new color (moved to a separate function)
+  updateColorURL(color);
 }
+
+// Debounce function to limit the frequency of URL updates
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Debounced function to update URL
+const updateColorURL = debounce((color) => {
+  updateURL(color);
+}, 300);
 
 const colorInput = document.getElementById('color-input');
 const hexInput = document.getElementById('hex-input');
@@ -118,7 +136,7 @@ colorInput.addEventListener('input', (e) => {
 
 hexInput.addEventListener('input', (e) => {
   const color = e.target.value;
-  if (/^#[0-9A-Fa-f]{6}$/.test(color) && color !== colorInput.value) { // Input validation
+  if (/^#[0-9A-Fa-f]{6}$/.test(color) && color !== colorInput.value) {
     colorInput.value = color;
     updatePalette(color);
   }
