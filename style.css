@@ -1,87 +1,62 @@
 :root {
   --background: #111214;
   --element-color: #1a1b1f;
-  --element-color-light: #e7e9ea;
   --text-color: #e7e9ea;
-  --hover-color: #484d53;
-  --text-color-dark: #262626;
+  --primary-color: #007bff;
+  --primary-color-hover: #0062cc;
+  --border-color: #343a40;
+  --hover-color: #212529;
+  --disabled-color: #343a40;
 
   font-size: clamp(100%, 2.5vw, 112.50%);
   line-height: 1.5;
   color: var(--text-color);
-  
-  h1 {
-    font-size: 3.815rem;
-  }
-
-  h2 {
-    font-size: 3.052rem;
-  }
-
-  h3 {
-    font-size: 2.441rem;
-  }
-
-  h4 {
-    font-size: 1.953rem;
-  }
-
-  h5 {
-    font-size: 1.563rem;
-  }
-
-  h6 {
-    font-size: 1.250rem;
-  }
-
-  @media screen and (max-width: 750px) {
-    h1 {
-      font-size: 2.986rem; 
-    }
-    
-    h2 {
-      font-size: 2.488rem; 
-    }
-    
-    h3 {
-      font-size: 2.074rem; 
-    }
-    
-    h4 {
-      font-size: 1.728rem; 
-    }
-    
-    h5 {
-      font-size: 1.440rem; 
-    }
-    
-    h6 {
-      font-size: 1.200rem; 
-    }
-  }
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--background);
-  color: var(--color-50);
+  color: var(--text-color);
   margin: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: radial-gradient(
+    var(--border-color) 1px,
+    transparent 0
+  );
+  background-size: 40px 40px;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   flex: 1;
-  /* Allow container to fill available space */
+  padding-top: 88px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
 }
 
 h1 {
+  font-size: 2.986rem;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2.488rem;
+}
+
+h3 {
+  font-size: 2.074rem;
+}
+
+h4 {
+  font-size: 1.728rem;
 }
 
 #controls {
@@ -89,10 +64,11 @@ h1 {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 20px;
-  background-color: var(--element-color-light);
+  background-color: var(--element-color);
   border-radius: 100vh;
   padding: 12px 24px;
   height: 64px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #share-button {
@@ -103,46 +79,31 @@ h1 {
   margin-left: auto;
   border-radius: 100vh;
   box-shadow: none;
+  border: none;
+  background-color: transparent;
 }
 
 #share-button img {
   height: inherit;
   padding: 6px;
+  filter: invert(1);
 }
 
-#share-button:hover{
+#share-button:hover {
   background-color: var(--hover-color);
 }
 
-#controls input {
-  background-color: transparent;
-  color: var(--text-color-dark);
-  border: 0;
-  font-size: 1.250rem;
-}
-
-.example-components input,
-.example-components button {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
-}
-
 #color-input {
-  height: 100%;
-  width: auto;
-  aspect-ratio: 1;
+  height: 44px;
+  width: 44px;
   border-radius: 100vh;
   -webkit-appearance: none;
-  /* Customize color input */
   -moz-appearance: none;
   appearance: none;
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+  border: none;
 }
 
 #color-input::-webkit-color-swatch-wrapper {
@@ -151,14 +112,16 @@ h1 {
 
 #color-input::-webkit-color-swatch {
   border: none;
-  border-radius: 5px;
+  border-radius: 100vh;
 }
 
 #hex-input {
   width: 100px;
-  background-color: var(--color-800);
-  color: var(--color-100);
-  border: 1px solid var(--color-600);
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  font-size: 1rem;
+  padding: 0 12px;
 }
 
 #palette {
@@ -177,12 +140,11 @@ h1 {
   justify-content: center;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
 }
 
 .color-value {
   background-color: rgba(0, 0, 0, 0.5);
-  color: var(--color-50);
+  color: var(--text-color);
   padding: 5px;
   border-radius: 3px;
   font-size: 14px;
@@ -199,43 +161,70 @@ h1 {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
 }
 
-.component h2 {
-  color: var(--color-100);
+.component h3 {
   margin-top: 0;
+  font-size: 1.563rem;
 }
 
 .button {
-  background-color: var(--color-500);
-  color: var(--color-50);
+  background-color: var(--primary-color);
+  color: var(--text-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  /* Add transition */
+  font-size: 1rem;
 }
 
 .button:hover {
-  background-color: var(--color-600);
+  background-color: var(--primary-color-hover);
 }
 
 .input {
-  background-color: var(--color-700);
-  color: var(--color-100);
-  border: 1px solid var(--color-600);
+  background-color: var(--element-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   padding: 10px;
   border-radius: 5px;
   width: 100%;
+  font-size: 1rem;
 }
 
 .card {
-  background-color: var(--color-900);
+  background-color: var(--element-color);
   border-radius: 5px;
   padding: 15px;
   margin-top: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
+}
+
+@media screen and (max-width: 750px) {
+  h1 {
+    font-size: 2.488rem;
+  }
+
+  h2 {
+    font-size: 2.074rem;
+  }
+
+  h3 {
+    font-size: 1.728rem;
+  }
+
+  #controls {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px;
+  }
+
+  #hex-input {
+    flex-grow: 1;
+  }
+
+  #share-button {
+    margin-left: 0;
+  }
 }
