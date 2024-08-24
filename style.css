@@ -168,9 +168,10 @@ h4 {
   font-size: 1.563rem;
 }
 
+
 .button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+  background-color: var(--color-500);
+  color: var(--color-50);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -180,13 +181,13 @@ h4 {
 }
 
 .button:hover {
-  background-color: var(--primary-color-hover);
+  background-color: var(--color-600);
 }
 
 .input {
-  background-color: var(--element-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
+  background-color: var(--color-100);
+  color: var(--color-900);
+  border: 1px solid var(--color-300);
   padding: 10px;
   border-radius: 5px;
   width: 100%;
@@ -194,11 +195,12 @@ h4 {
 }
 
 .card {
-  background-color: var(--element-color);
+  background-color: var(--color-100);
+  color: var(--color-900);
   border-radius: 5px;
   padding: 15px;
   margin-top: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-300);
 }
 
 @media screen and (max-width: 750px) {
