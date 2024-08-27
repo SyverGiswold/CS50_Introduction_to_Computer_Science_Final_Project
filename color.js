@@ -58,7 +58,7 @@ function generatePalette(hex, numColors = 11) {
   const [h, s, l] = convertHexToHSL(hex);
 
   const lightnessSteps = Array.from({ length: numColors }, (_, i) => {
-    return 95 - i * (90 / (numColors - 1));
+    return 90 - i * (80 / (numColors - 1)); // Reduced max lightness to 90%
   });
 
   const closestIndex = lightnessSteps.reduce((closest, current, index) => {
@@ -86,6 +86,52 @@ function generatePalette(hex, numColors = 11) {
   return palette;
 }
 
+
+function hexToRgb(hex) {
+  // Ensure the hex color starts with '#'
+  hex = hex.startsWith('#') ? hex.slice(1) : hex;
+
+  // Handle both short (e.g., #FFF) and long (e.g., #FFFFFF) hex colors
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+
+  // Match 6-digit or 8-digit hex codes
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex);
+
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16),
+    // Optional alpha value (if 8-digit hex)
+    result[4] ? parseInt(result[4], 16) / 255 : 1 // Default to 1 (fully opaque) if no alpha
+  ] : null;
+}
+
+function calculateRelativeLuminance(hex) {
+  const rgb = hexToRgb(hex);
+  if (!rgb) {
+    console.warn(`Invalid hex color: ${hex}`);
+    return 0; // Return 0 luminance for invalid colors
+  }
+  
+  const [r, g, b] = rgb.map(channel => {
+    channel /= 255;
+    return channel <= 0.03928
+      ? channel / 12.92
+      : Math.pow((channel + 0.055) / 1.055, 2.4);
+  });
+
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function calculateContrastRatio(color1, color2) {
+  const luminance1 = calculateRelativeLuminance(color1);
+  const luminance2 = calculateRelativeLuminance(color2);
+  const brighter = Math.max(luminance1, luminance2);
+  const darker = Math.min(luminance1, luminance2);
+  return (brighter + 0.05) / (darker + 0.05);
+}
+
 function updatePalette(color) {
   const palette = document.getElementById('palette');
   palette.innerHTML = '';
@@ -94,6 +140,10 @@ function updatePalette(color) {
   let cssVariables = '';
   const colorNames = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
 
+  // Get the lightest and darkest colors from the generated palette
+  const lightestColor = colors[0];
+  const darkestColor = colors[colors.length - 1];
+
   colors.forEach((shade, index) => {
     cssVariables += `--color-${colorNames[index]}: ${shade}; `;
 
@@ -101,9 +151,16 @@ function updatePalette(color) {
     box.className = 'color-box';
     box.style.backgroundColor = shade;
 
+    const contrastWithLightest = calculateContrastRatio(shade, lightestColor);
+    const contrastWithDarkest = calculateContrastRatio(shade, darkestColor);
+    
+    const textColor = contrastWithLightest > contrastWithDarkest ? lightestColor : darkestColor;
+    const contrastRatio = Math.max(contrastWithLightest, contrastWithDarkest).toFixed(2);
+
     const value = document.createElement('span');
     value.className = 'color-value';
-    value.textContent = shade.toUpperCase();
+    value.style.color = textColor;
+    value.textContent = `${shade.toUpperCase()} (${contrastRatio}:1)`;
 
     if (shade.toUpperCase() === color.toUpperCase()) {
       box.classList.add('original-color');
@@ -114,6 +171,7 @@ function updatePalette(color) {
     palette.appendChild(box);
   });
 
+  // Apply the generated colors to the root element
   document.documentElement.style.cssText += cssVariables;
 
   updateColorURL(color);

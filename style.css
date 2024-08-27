@@ -62,20 +62,54 @@ h4 {
 #controls {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 6px;
   margin-bottom: 20px;
   background-color: var(--element-color);
   border-radius: 100vh;
-  padding: 12px 24px;
+
   height: 64px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+#controls * {
+  padding: 12px;
+  height: 100%;
+}
+
+#color-input {
+  aspect-ratio: 1;
+  width: auto;
+  border-radius: 100vh;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+#color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+#color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 100vh;
+}
+
+#hex-input {
+  width: 100%;
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  font-size: 1rem;
+  padding: 0 12px;
+}
+
 #share-button {
-  height: 44px;
   aspect-ratio: 1;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 300ms ease;
   margin-left: auto;
   border-radius: 100vh;
   box-shadow: none;
@@ -93,43 +127,16 @@ h4 {
   background-color: var(--hover-color);
 }
 
-#color-input {
-  height: 44px;
-  width: 44px;
-  border-radius: 100vh;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-}
-
-#color-input::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-
-#color-input::-webkit-color-swatch {
-  border: none;
-  border-radius: 100vh;
-}
-
-#hex-input {
-  width: 100px;
-  background-color: transparent;
-  color: var(--text-color);
-  border: none;
-  font-size: 1rem;
-  padding: 0 12px;
-}
-
 #palette {
   display: flex;
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 12px;
+}
+
+#palette ~ p {
+  margin-bottom: 48px;
 }
 
 .color-box {
@@ -140,14 +147,30 @@ h4 {
   justify-content: center;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .color-value {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: var(--text-color);
+
+  color: #FFFFFF;
   padding: 5px;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  transition: opacity 300ms ease;
+}
+
+.color-box:hover .color-value {
+  opacity: 1;
+}
+
+.original-color .color-value {
+  font-weight: bold;
 }
 
 .example-components {
@@ -176,7 +199,7 @@ h4 {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 300ms ease;
   font-size: 1rem;
 }
 
@@ -214,19 +237,5 @@ h4 {
 
   h3 {
     font-size: 1.728rem;
-  }
-
-  #controls {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 12px;
-  }
-
-  #hex-input {
-    flex-grow: 1;
-  }
-
-  #share-button {
-    margin-left: 0;
   }
 }
