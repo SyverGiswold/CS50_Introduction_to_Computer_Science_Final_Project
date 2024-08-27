@@ -7,35 +7,103 @@
   <title>Document</title>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
-  <script async type="module" src="script.js"></script>
+  <link rel="stylesheet" href="components.css">
+  <script async type="module" src="color.js"></script>
+  <script async src="components.js"></script>
 </head>
 
 <body>
   <div class="container">
     <h1>Color Palette Generator</h1>
     <div id="controls">
-        <input type="color" id="color-input" value="#2FD0B8">
-        <input autocomplete="off" type="text" id="hex-input" value="#2FD0B8">
+      <input type="color" id="color-input" value="#2FD0B8">
+      <input autocomplete="off" type="text" id="hex-input" value="#2FD0B8">
       <button id="share-button"><img src="./assets/link.svg" alt="Share color palette"></button>
     </div>
     <div id="palette"></div>
+    <p>Contrast ratio is based on using the darkest or lightest text color.</p>
     <h2>Example components</h2>
     <div class="example-components">
       <div class="component">
         <h3>Buttons</h3>
-        <button class="button">Primary Button</button>
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-secondary">Secondary Action</button>
       </div>
+
+      <!-- Input -->
       <div class="component">
-        <h3>Input Fields</h3>
-        <input type="text" class="input" placeholder="Enter text...">
-      </div>
-      <div class="component">
-        <h3>Cards</h3>
-        <div class="card">
-          <h4>Card Title</h4>
-          <p>This is some sample text for the card component.</p>
+        <h3>Input Field</h3>
+        <div class="input-group">
+          <label for="sample-input">Enter your name</label>
+          <input type="text" id="sample-input" placeholder="John Doe">
         </div>
       </div>
+
+      <!-- Toggle Switch -->
+      <div class="component">
+        <h3>Toggle Switch</h3>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="component">
+        <h3>Progress Bar</h3>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="component">
+        <h3>Accordion</h3>
+        <div class="accordion">
+          <div class="accordion-item active">
+            <div class="accordion-header">Section 1</div>
+            <div class="accordion-content">
+              <p>This is the content for section 1.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">Section 2</div>
+            <div class="accordion-content">
+              <p>This is the content for section 2.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooltip -->
+      <div class="component">
+        <h3>Tooltip</h3>
+        <div class="tooltip">Hover over me
+          <span class="tooltiptext">This is a tooltip!</span>
+        </div>
+      </div>
+
+      <!-- Notification Badge -->
+      <div class="component">
+        <h3>Notification Badge</h3>
+        <button class="btn btn-secondary">
+          Notifications <span class="badge">3</span>
+        </button>
+      </div>
+
+      <!-- Custom Radio Buttons -->
+      <div class="component">
+        <h3>Custom Radio Buttons</h3>
+        <div class="radio-group">
+          <input type="radio" id="option1" name="options" checked>
+          <label for="option1">Option 1</label>
+          <input type="radio" id="option2" name="options">
+          <label for="option2">Option 2</label>
+          <input type="radio" id="option3" name="options">
+          <label for="option3">Option 3</label>
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
