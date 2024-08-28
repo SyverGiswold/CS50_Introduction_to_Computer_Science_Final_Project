@@ -121,10 +121,11 @@ input:checked + .slider:before {
 
 /* Progress Bar */
 .progress-bar {
+  position: relative;
   background-color: var(--color-200);
   height: 20px;
   border-radius: 100vh;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .progress {
@@ -132,11 +133,29 @@ input:checked + .slider:before {
   height: 100%;
   background-color: var(--color-500);
   animation: progressAnimation 3s ease-in-out infinite alternate;
+  border-radius: 100vh;
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-200);
+  border: 8px solid var(--color-500);
+  border-radius: 100vh;
+  transform: translate(-50%, -50%);
+  animation: progressThumbAnimation 3s ease-in-out infinite alternate;
 }
 
 @keyframes progressAnimation {
   0% { width: 15%; }
   100% { width: 85%; }
+}
+
+@keyframes progressThumbAnimation {
+  0% { left: 15%; }
+  100% { left: 85%; }
 }
 
 /* Accordion */
@@ -174,6 +193,7 @@ input:checked + .slider:before {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  color: var(--color-50);
 }
 
 .tooltip .tooltiptext {
