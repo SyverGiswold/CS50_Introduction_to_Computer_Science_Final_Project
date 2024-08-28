@@ -113,7 +113,7 @@ function calculateRelativeLuminance(hex) {
     console.warn(`Invalid hex color: ${hex}`);
     return 0; // Return 0 luminance for invalid colors
   }
-  
+
   const [r, g, b] = rgb.map(channel => {
     channel /= 255;
     return channel <= 0.03928
@@ -153,7 +153,7 @@ function updatePalette(color) {
 
     const contrastWithLightest = calculateContrastRatio(shade, lightestColor);
     const contrastWithDarkest = calculateContrastRatio(shade, darkestColor);
-    
+
     const textColor = contrastWithLightest > contrastWithDarkest ? lightestColor : darkestColor;
     const contrastRatio = Math.max(contrastWithLightest, contrastWithDarkest).toFixed(2);
 

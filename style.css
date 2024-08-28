@@ -23,10 +23,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: radial-gradient(
-    var(--border-color) 1px,
-    transparent 0
-  );
+  background-image: radial-gradient(var(--border-color) 1px,
+      transparent 0);
   background-size: 40px 40px;
 }
 
@@ -37,7 +35,12 @@ body {
   padding-top: 88px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 1rem;
 }
 
@@ -97,6 +100,11 @@ h4 {
   border-radius: 100vh;
 }
 
+#color-input::-moz-color-swatch {
+  border: none;
+  border-radius: 100vh;
+}
+
 #hex-input {
   width: 100%;
   background-color: transparent;
@@ -152,7 +160,6 @@ h4 {
 }
 
 .color-value {
-
   color: #FFFFFF;
   padding: 5px;
   border-radius: 3px;
