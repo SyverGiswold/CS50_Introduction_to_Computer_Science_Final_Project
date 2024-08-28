@@ -13,6 +13,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .btn-primary {
@@ -225,7 +226,7 @@ input:checked + .slider:before {
 .badge {
   display: inline-block;
   padding: 3px 7px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1;
   color: var(--color-50);
