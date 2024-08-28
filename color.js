@@ -58,7 +58,7 @@ function generatePalette(hex, numColors = 11) {
   const [h, s, l] = convertHexToHSL(hex);
 
   const lightnessSteps = Array.from({ length: numColors }, (_, i) => {
-    return 90 - i * (80 / (numColors - 1)); // Reduced max lightness to 90%
+    return 90 - i * (80 / (numColors - 1));
   });
 
   const closestIndex = lightnessSteps.reduce((closest, current, index) => {
@@ -91,19 +91,16 @@ function hexToRgb(hex) {
   // Ensure the hex color starts with '#'
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
-  // Handle both short (e.g., #FFF) and long (e.g., #FFFFFF) hex colors
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
 
-  // Match 6-digit or 8-digit hex codes
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex);
 
   return result ? [
     parseInt(result[1], 16),
     parseInt(result[2], 16),
     parseInt(result[3], 16),
-    // Optional alpha value (if 8-digit hex)
-    result[4] ? parseInt(result[4], 16) / 255 : 1 // Default to 1 (fully opaque) if no alpha
+    result[4] ? parseInt(result[4], 16) / 255 : 1
   ] : null;
 }
 
@@ -111,7 +108,7 @@ function calculateRelativeLuminance(hex) {
   const rgb = hexToRgb(hex);
   if (!rgb) {
     console.warn(`Invalid hex color: ${hex}`);
-    return 0; // Return 0 luminance for invalid colors
+    return 0;
   }
 
   const [r, g, b] = rgb.map(channel => {
