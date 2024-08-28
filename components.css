@@ -108,15 +108,15 @@
   background-color: var(--color-300);
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--color-500);
 }
 
-input:checked + .slider:hover {
+input:checked+.slider:hover {
   background-color: var(--color-600);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(26px);
 }
 
@@ -150,13 +150,23 @@ input:checked + .slider:before {
 }
 
 @keyframes progressAnimation {
-  0% { width: 15%; }
-  100% { width: 85%; }
+  0% {
+    width: 15%;
+  }
+
+  100% {
+    width: 85%;
+  }
 }
 
 @keyframes progressThumbAnimation {
-  0% { left: 15%; }
-  100% { left: 85%; }
+  0% {
+    left: 15%;
+  }
+
+  100% {
+    left: 85%;
+  }
 }
 
 /* Accordion */
@@ -234,7 +244,7 @@ input:checked + .slider:before {
   border-radius: 100vh;
 }
 
-.btn:hover > .badge {
+.btn:hover>.badge {
   background-color: var(--color-600);
 }
 
@@ -259,7 +269,7 @@ input:checked + .slider:before {
   display: none;
 }
 
-.radio-group input[type="radio"]:checked + label {
+.radio-group input[type="radio"]:checked+label {
   background-color: var(--color-500);
   color: var(--color-50);
 }
