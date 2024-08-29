@@ -23,7 +23,7 @@ And because being able to share a color palette easily is important, there's a h
 
 ## How It Works:
 
-So, here's how this color palette generator actually works under the hood:
+So, here's how this color palette generator works:
 
 First off, when you input a color (either with the color picker or by typing a hex code), the app takes that hex code and converts it to HSL (Hue, Saturation, Lightness) values. This conversion happens in the `convertHexToHSL` function. We use HSL because it's easier to create variations of a color by adjusting the lightness while keeping the hue and saturation the same.
 
