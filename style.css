@@ -2,11 +2,8 @@
   --background: #111214;
   --element-color: #1a1b1f;
   --text-color: #e7e9ea;
-  --primary-color: #007bff;
-  --primary-color-hover: #0062cc;
   --border-color: #343a40;
   --hover-color: #212529;
-  --disabled-color: #343a40;
 
   font-size: clamp(100%, 2.5vw, 112.50%);
   line-height: 1.5;
