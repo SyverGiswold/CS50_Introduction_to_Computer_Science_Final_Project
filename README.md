@@ -1,7 +1,6 @@
 # Color Palette Generator
 
-#### Video Demo: <URL HERE>
-
+#### Video Demo: <https://www.youtube.com/watch?v=AGTatj4DK6w>
 ## Description:
 
 For my CS50 final project, I wanted to build something that I knew I'd find useful as I'm learning web development – a color palette generator. Picking good color schemes can be tricky, so I figured I'd make a tool that takes the guesswork out of it. It's pretty simple, you give it a color using either a color picker or writing a hex code, and it generates eleven shades, from light to dark. This gives you a solid foundation for designing a website with consistent and visually appealing colors.
