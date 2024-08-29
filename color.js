@@ -1,6 +1,7 @@
 import { updateURL, getColorFromURL, copyURLToClipboard } from './share.js';
 
 // Converts a hexadecimal color code to HSL (Hue, Saturation, Lightness) values
+// reference for converting hex to hsl https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 function convertHexToHSL(hex) {
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
@@ -31,6 +32,7 @@ function convertHexToHSL(hex) {
 }
 
 // Converts HSL (Hue, Saturation, Lightness) values to a hexadecimal color code
+// ChatGPT was used to help me return the HSL as a hex code
 function convertHSLToHex(h, s, l) {
   l /= 100;
   const a = s * Math.min(l, 1 - l) / 100;
@@ -90,6 +92,7 @@ function generatePalette(hex, numColors = 11) {
 }
 
 // Converts a hexadecimal color code to RGB values. Used for contrast ratio
+// reference for converting hex to rgb https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 function hexToRgb(hex) {
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
@@ -125,6 +128,7 @@ function calculateRelativeLuminance(hex) {
 }
 
 // Calculates the contrast ratio between two colors
+// reference to calculate contrast ratio referance to calculate contrsat ratio https://medium.muz.li/the-science-of-color-contrast-an-expert-designers-guide-33e84c41d156
 function calculateContrastRatio(color1, color2) {
   const luminance1 = calculateRelativeLuminance(color1);
   const luminance2 = calculateRelativeLuminance(color2);
@@ -178,6 +182,7 @@ function updatePalette(color) {
 }
 
 // Debounces a function to limit how often it can be called
+// ChatGPT was used to help me write this function instead of using just setTimout on the updateColor function in the share.js file
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
