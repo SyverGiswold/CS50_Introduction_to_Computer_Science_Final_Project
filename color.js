@@ -1,5 +1,6 @@
 import { updateURL, getColorFromURL, copyURLToClipboard } from './share.js';
 
+// Converts a hexadecimal color code to HSL (Hue, Saturation, Lightness) values
 function convertHexToHSL(hex) {
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
@@ -29,6 +30,7 @@ function convertHexToHSL(hex) {
   return [h * 360, s * 100, l * 100];
 }
 
+// Converts HSL (Hue, Saturation, Lightness) values to a hexadecimal color code
 function convertHSLToHex(h, s, l) {
   l /= 100;
   const a = s * Math.min(l, 1 - l) / 100;
@@ -41,6 +43,7 @@ function convertHSLToHex(h, s, l) {
   return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+// Generates a color palette based on the input hexadecimal color
 function generatePalette(hex, numColors = 11) {
   if (hex.toLowerCase() === '#000000') {
     const grayValues = Array.from({ length: numColors }, (_, i) => {
@@ -86,9 +89,8 @@ function generatePalette(hex, numColors = 11) {
   return palette;
 }
 
-
+// Converts a hexadecimal color code to RGB values. Used for contrast ratio
 function hexToRgb(hex) {
-  // Ensure the hex color starts with '#'
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -104,6 +106,7 @@ function hexToRgb(hex) {
   ] : null;
 }
 
+// Calculates the relative luminance of a color
 function calculateRelativeLuminance(hex) {
   const rgb = hexToRgb(hex);
   if (!rgb) {
@@ -121,6 +124,7 @@ function calculateRelativeLuminance(hex) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
+// Calculates the contrast ratio between two colors
 function calculateContrastRatio(color1, color2) {
   const luminance1 = calculateRelativeLuminance(color1);
   const luminance2 = calculateRelativeLuminance(color2);
@@ -129,6 +133,7 @@ function calculateContrastRatio(color1, color2) {
   return (brighter + 0.05) / (darker + 0.05);
 }
 
+// Updates the color palette display and CSS variables based on the selected color
 function updatePalette(color) {
   const palette = document.getElementById('palette');
   palette.innerHTML = '';
@@ -137,7 +142,6 @@ function updatePalette(color) {
   let cssVariables = '';
   const colorNames = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
 
-  // Get the lightest and darkest colors from the generated palette
   const lightestColor = colors[0];
   const darkestColor = colors[colors.length - 1];
 
@@ -168,12 +172,12 @@ function updatePalette(color) {
     palette.appendChild(box);
   });
 
-  // Apply the generated colors to the root element
   document.documentElement.style.cssText += cssVariables;
 
   updateColorURL(color);
 }
 
+// Debounces a function to limit how often it can be called
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -186,10 +190,12 @@ function debounce(func, wait) {
   };
 }
 
+// Debounced function to update the URL with the selected color
 const updateColorURL = debounce((color) => {
   updateURL(color);
 }, 300);
 
+// Main execution and event listeners
 const colorInput = document.getElementById('color-input');
 const hexInput = document.getElementById('hex-input');
 const shareButton = document.getElementById('share-button');
